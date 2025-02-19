@@ -1,0 +1,23 @@
+-- Buat database (jika belum ada)
+CREATE DATABASE IF NOT EXISTS webapp_db;
+USE webapp_db;
+
+-- Tabel utama untuk menyimpan data kontak
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    phone_number VARCHAR(50) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    whatsapp VARCHAR(50) NOT NULL,
+    address VARCHAR(255),
+    description TEXT
+);
+
+-- Tabel untuk menyimpan data tambahan (extra fields) per kontak
+CREATE TABLE contact_extra_fields (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contact_id INT NOT NULL,
+    field_name VARCHAR(255) NOT NULL,
+    field_value TEXT,
+    FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE CASCADE
+);
